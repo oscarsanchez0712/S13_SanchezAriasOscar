@@ -1,0 +1,29 @@
+<div class="encabezado-pagina">
+  <div>
+    <span class="etiqueta">RESUMEN GENERAL</span>
+    <h1>Bienvenido a Hotel Valle Real</h1>
+    <p>Consulta el estado general de habitaciones, huéspedes y reservas.</p>
+  </div>
+</div>
+
+<div class="estadisticas">
+  @for (kpi of kpis; track kpi.titulo) {
+    <div class="stat-card">
+      <span>{{ kpi.titulo }}</span>
+      <h2>{{ kpi.valor }}</h2>
+      <small>{{ kpi.detalle }}</small>
+    </div>
+  }
+</div>
+
+<div class="panel">
+  <h2>Accesos rápidos</h2>
+  <div class="accesos">
+    @for (a of accesos; track a.ruta) {
+      <a class="acceso" [routerLink]="a.ruta">
+        <strong>{{ a.titulo }}</strong>
+        <span>{{ a.texto }}</span>
+      </a>
+    }
+  </div>
+</div>

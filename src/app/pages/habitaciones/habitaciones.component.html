@@ -1,0 +1,42 @@
+<div class="encabezado-pagina">
+  <div>
+    <h1>Habitaciones</h1>
+    <p>Tipos de habitación y estado actual de cada una.</p>
+  </div>
+  <span class="total">{{ habitaciones.length }} registros</span>
+</div>
+
+<div class="tipos">
+  @for (t of tipos; track t.nombre) {
+    <div class="tipo-card">
+      <h3>{{ t.nombre }}</h3>
+      <p>{{ t.detalle }}</p>
+      <small>Capacidad: {{ t.capacidad }} · S/ {{ t.precio }} por noche</small>
+    </div>
+  }
+</div>
+
+<div class="tabla-contenedor">
+  <table>
+    <thead>
+      <tr>
+        <th>Número</th>
+        <th>Tipo</th>
+        <th>Piso</th>
+        <th>Precio por noche</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (h of habitaciones; track h.numero) {
+        <tr>
+          <td>{{ h.numero }}</td>
+          <td>{{ h.tipo }}</td>
+          <td>{{ h.piso }}</td>
+          <td>S/ {{ h.precio }}</td>
+          <td><span [class]="'badge ' + h.estado.toLowerCase()">{{ h.estado }}</span></td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

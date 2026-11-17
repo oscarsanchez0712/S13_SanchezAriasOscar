@@ -1,0 +1,32 @@
+<div class="encabezado-pagina">
+  <div>
+    <h1>Huéspedes</h1>
+    <p>Consulta los huéspedes registrados en el hotel.</p>
+  </div>
+  <span class="total">{{ huespedes.length }} registros</span>
+</div>
+
+<div class="tabla-contenedor">
+  <table>
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nombre completo</th>
+        <th>Documento</th>
+        <th>País</th>
+        <th>Habitación</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (h of huespedes; track h.id) {
+        <tr>
+          <td>{{ h.id }}</td>
+          <td>{{ h.nombre }}</td>
+          <td>{{ h.documento }}</td>
+          <td>{{ h.pais }}</td>
+          <td>{{ h.habitacion }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

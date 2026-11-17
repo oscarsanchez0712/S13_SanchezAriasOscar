@@ -1,0 +1,76 @@
+
+<div class="dashboard">
+
+  <aside class="sidebar">
+
+    <div class="brand">
+      <div class="brand-icon">HV</div>
+      <div>
+        <h2>Hotel Valle Real</h2>
+        <span>Sistema hotelero</span>
+      </div>
+    </div>
+
+    <div class="menu-label">MENÚ PRINCIPAL</div>
+
+    <nav class="menu">
+
+      <a routerLink="/inicio"
+         routerLinkActive="activo"
+         [routerLinkActiveOptions]="{ exact: true }">
+        <span class="menu-icon">⌂</span>
+        Inicio
+      </a>
+
+      <a routerLink="/habitaciones"
+         routerLinkActive="activo">
+        <span class="menu-icon">▤</span>
+        Habitaciones
+      </a>
+
+      <a routerLink="/huespedes"
+         routerLinkActive="activo">
+        <span class="menu-icon">♙</span>
+        Huéspedes
+      </a>
+
+      <a routerLink="/reservas"
+         routerLinkActive="activo">
+        <span class="menu-icon">▦</span>
+        Reservas
+      </a>
+
+    </nav>
+
+    <div class="sidebar-footer">
+      <span class="estado"></span>
+      Sistema de Hotel
+      <small>Versión demostrativa</small>
+    </div>
+
+  </aside>
+
+  <main class="main">
+
+    <header class="topbar">
+      <div>
+        <span class="topbar-label">GESTIÓN HOTELERA</span>
+        <h2>Panel de administración del hotel</h2>
+      </div>
+
+      <div class="usuario">
+        <div class="avatar">AD</div>
+        <div>
+          <strong>Administrador</strong>
+          <small>Usuario del sistema</small>
+        </div>
+      </div>
+    </header>
+
+    <section class="contenido">
+      <router-outlet></router-outlet>
+    </section>
+
+  </main>
+
+</div>

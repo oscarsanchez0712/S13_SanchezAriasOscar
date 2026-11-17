@@ -1,0 +1,24 @@
+.error-panel {
+  max-width: 480px;
+  margin: 40px auto;
+  padding: 40px 30px;
+  text-align: center;
+  border: 1px solid #e7edf5;
+  border-radius: 13px;
+  background: white;
+}
+
+.codigo { color: #2868b2; font-size: 56px; font-weight: 800; }
+h1 { margin: 10px 0; color: #25334a; font-size: 22px; }
+p { color: #8290a3; font-size: 14px; }
+
+a {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 11px 20px;
+  border-radius: 9px;
+  background: #2868b2;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}

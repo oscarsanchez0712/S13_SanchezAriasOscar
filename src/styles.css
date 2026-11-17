@@ -1,0 +1,80 @@
+/* You can add global styles to this file, and also import other style files */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f8fc;
+}
+
+body {
+  color: #25334a;
+}
+
+button, input {
+  font-family: inherit;
+}
+
+/* ---- Estilos compartidos ---- */
+.encabezado-pagina {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.encabezado-pagina h1 { margin: 8px 0; color: #25334a; font-size: 26px; }
+.encabezado-pagina p { margin: 0; color: #8290a3; font-size: 14px; line-height: 1.6; }
+
+.etiqueta { color: #3979c3; font-size: 11px; font-weight: 700; letter-spacing: 1px; }
+
+.total {
+  padding: 9px 13px;
+  border-radius: 20px;
+  background: #eaf3ff;
+  color: #2868b2;
+  font-size: 12px;
+}
+
+.panel {
+  padding: 23px;
+  border: 1px solid #e7edf5;
+  border-radius: 13px;
+  background: white;
+}
+
+.panel h2 { margin: 0 0 16px; color: #344258; font-size: 18px; }
+
+.tabla-contenedor {
+  overflow-x: auto;
+  border: 1px solid #e7edf5;
+  border-radius: 12px;
+  background: white;
+}
+
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th, td { padding: 17px; border-bottom: 1px solid #edf0f5; font-size: 13px; }
+th { background: #f8faff; color: #66778d; }
+td { color: #344258; }
+
+.badge {
+  display: inline-block;
+  padding: 5px 11px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.badge.disponible, .badge.confirmada { background: #e3f6ee; color: #1f8f65; }
+.badge.ocupada, .badge.pendiente { background: #eaf3ff; color: #2868b2; }
+.badge.mantenimiento { background: #fff4e0; color: #b87612; }
+.badge.cancelada { background: #fdeaea; color: #c0392b; }
+
+@media (max-width: 500px) {
+  .encabezado-pagina { align-items: flex-start; flex-direction: column; }
+}
