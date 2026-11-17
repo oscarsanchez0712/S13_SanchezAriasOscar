@@ -1,0 +1,67 @@
+<header class="topbar">
+  <div class="fecha">
+    <strong>Hotel Valle Real</strong>
+    <span>{{ fecha }}</span>
+  </div>
+
+  <div class="buscador">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="7"/>
+      <path d="m20 20-3.5-3.5"/>
+    </svg>
+    <input type="search" placeholder="Buscar huésped, reserva o habitación..."
+           [value]="busqueda" (input)="buscar($any($event.target).value)" />
+
+    @if (busqueda.trim().length >= 2) {
+      <div class="resultados">
+        @for (r of resultados; track $index) {
+          <a [routerLink]="r.ruta" (click)="cerrar()">
+            <strong>{{ r.texto }}</strong>
+            <span>{{ r.detalle }}</span>
+          </a>
+        } @empty {
+          <p>Sin resultados</p>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="acciones">
+    <div class="menu">
+      <button class="icono-btn" type="button" aria-label="Notificaciones" (click)="alternar('avisos')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9a6 6 0 0 1 12 0c0 6 2.5 7.5 2.5 7.5h-17S6 15 6 9Z"/>
+          <path d="M10 20a2 2 0 0 0 4 0"/>
+        </svg>
+        <span class="contador">{{ avisos.length }}</span>
+      </button>
+      @if (abierto === 'avisos') {
+        <div class="desplegable">
+          <h3>Notificaciones</h3>
+          @for (a of avisos; track a.texto) {
+            <a [routerLink]="a.ruta" (click)="cerrar()">{{ a.texto }}</a>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="menu">
+      <button class="usuario" type="button" (click)="alternar('usuario')">
+        <span class="avatar">AD</span>
+        <span class="datos">
+          <strong>Administrador</strong>
+          <small>Recepción</small>
+        </span>
+      </button>
+      @if (abierto === 'usuario') {
+        <div class="desplegable">
+          <strong>Administrador</strong>
+          <small>admin&#64;hotelvallereal.pe</small>
+          <button class="salir" type="button" (click)="cerrar()">Cerrar sesión</button>
+        </div>
+      }
+    </div>
+  </div>
+</header>
