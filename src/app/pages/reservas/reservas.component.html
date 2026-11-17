@@ -1,9 +1,22 @@
 <div class="encabezado-pagina">
   <div>
     <h1>Reservas</h1>
-    <p>Control de ingresos, salidas y estado de cada reserva.</p>
+    <p>Check-in, check-out y estados.</p>
   </div>
-  <span class="total">{{ reservas.length }} registros</span>
+  <span class="total">{{ lista.length }} de {{ todas.length }} reservas</span>
+</div>
+
+<div class="fx-barra">
+  <div class="fx-chips">
+    @for (e of estados; track e) {
+      <button type="button" class="fx-chip" [class.activo]="estado === e" (click)="estado = e">
+        {{ e }} <b>{{ contar(e) }}</b>
+      </button>
+    }
+  </div>
+
+  <input class="fx-input" type="search" placeholder="Buscar huésped, código o habitación..."
+         (input)="texto = $any($event.target).value" />
 </div>
 
 <div class="tabla-contenedor">
@@ -13,22 +26,31 @@
         <th>Código</th>
         <th>Huésped</th>
         <th>Habitación</th>
-        <th>Check-in</th>
-        <th>Check-out</th>
+        <th>Entrada</th>
+        <th>Salida</th>
+        <th>Noches</th>
+        <th>Total</th>
         <th>Estado</th>
       </tr>
     </thead>
     <tbody>
-      @for (r of reservas; track r.codigo) {
+      @for (r of lista; track r.codigo) {
         <tr>
           <td>{{ r.codigo }}</td>
           <td>{{ r.huesped }}</td>
           <td>{{ r.habitacion }}</td>
-          <td>{{ r.ingreso }}</td>
-          <td>{{ r.salida }}</td>
-          <td><span [class]="'badge ' + r.estado.toLowerCase()">{{ r.estado }}</span></td>
+          <td>{{ r.entradaTxt }}</td>
+          <td>{{ r.salidaTxt }}</td>
+          <td>{{ r.noches }}</td>
+          <td>S/ {{ r.total }}</td>
+          <td><span [class]="'fx-estado ' + r.estado.toLowerCase()">{{ r.estado }}</span></td>
         </tr>
       }
     </tbody>
   </table>
+  @if (lista.length === 0) {
+    <p class="fx-vacio">No hay reservas con esos filtros.</p>
+  }
 </div>
+
+<p class="fx-resumen">Ingresos estimados (sin canceladas): <strong>S/ {{ ingresos }}</strong></p>
