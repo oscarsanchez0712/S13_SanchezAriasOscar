@@ -1,0 +1,45 @@
+.fx-barra { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 18px; }
+.fx-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-right: auto; }
+
+.fx-chip {
+  padding: 8px 14px;
+  border: 1px solid #dde5ef;
+  border-radius: 20px;
+  background: white;
+  color: #5b6b81;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.fx-chip b { margin-left: 4px; color: #25334a; }
+.fx-chip:hover { border-color: #2868b2; }
+.fx-chip.activo { border-color: #2868b2; background: #2868b2; color: white; }
+.fx-chip.activo b { color: white; }
+
+.fx-select, .fx-input {
+  padding: 9px 13px;
+  border: 1px solid #dde5ef;
+  border-radius: 10px;
+  background: white;
+  color: #25334a;
+  font-size: 13px;
+  font-family: inherit;
+}
+.fx-input { min-width: 220px; }
+.fx-select:focus, .fx-input:focus { outline: none; border-color: #2868b2; }
+
+.fx-estado {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.fx-estado.ocupada, .fx-estado.confirmada { background: #e7f1ff; color: #2868b2; }
+.fx-estado.disponible { background: #e3f6ee; color: #1f8f65; }
+.fx-estado.mantenimiento, .fx-estado.pendiente { background: #fff4e0; color: #b87612; }
+.fx-estado.cancelada { background: #fdeaea; color: #c0392b; }
+
+.fx-vacio { padding: 28px; color: #9aa5b4; text-align: center; }
+.fx-resumen { margin-top: 14px; color: #77869a; font-size: 13px; text-align: right; }
