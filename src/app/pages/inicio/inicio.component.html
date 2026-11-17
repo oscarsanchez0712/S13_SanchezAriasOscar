@@ -8,12 +8,128 @@
 
 <div class="estadisticas">
   @for (kpi of kpis; track kpi.titulo) {
-    <div class="stat-card">
-      <span>{{ kpi.titulo }}</span>
+    <div [class]="'stat-card ' + kpi.color">
+
+      <div class="stat-top">
+        <div class="stat-icono">
+          @switch (kpi.icono) {
+            @case ('hotel') {
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                   stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16"/>
+                <path d="M15 10h4a1 1 0 0 1 1 1v10"/>
+                <path d="M2 21h20M8 8h3M8 12h3M8 16h3"/>
+              </svg>
+            }
+            @case ('llave') {
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                   stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="8" cy="15" r="4"/>
+                <path d="M10.8 12.2 20 3M16 7l3 3M14 9l2 2"/>
+              </svg>
+            }
+            @case ('personas') {
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                   stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="8" r="3.5"/>
+                <path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/>
+                <path d="M16 4.6a3.5 3.5 0 0 1 0 6.8"/>
+                <path d="M18 14.3c2.2.6 3.5 2.4 3.5 5.7"/>
+              </svg>
+            }
+            @case ('calendario') {
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                   stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4.5" width="18" height="16" rx="2"/>
+                <path d="M3 9.5h18M8 2.5v4M16 2.5v4M9 15l2 2 4-4"/>
+              </svg>
+            }
+          }
+        </div>
+
+        <span class="tendencia" [class.sube]="kpi.sube" [class.baja]="!kpi.sube">
+          {{ kpi.sube ? '↑' : '↓' }} {{ kpi.tendencia }}
+        </span>
+      </div>
+
+      <span class="stat-titulo">{{ kpi.titulo }}</span>
       <h2>{{ kpi.valor }}</h2>
+
+      @if (kpi.progreso !== undefined) {
+        <div class="barra">
+          <div class="barra-relleno" [style.width.%]="kpi.progreso"></div>
+        </div>
+      }
+
       <small>{{ kpi.detalle }}</small>
     </div>
   }
+</div>
+
+<!-- GRÁFICOS -->
+<div class="graficos">
+
+  <div class="panel">
+    <div class="panel-cabecera">
+      <div>
+        <h2>Ocupación de la semana</h2>
+        <small>Porcentaje de habitaciones ocupadas por día</small>
+      </div>
+      <span class="total">Hoy: 65%</span>
+    </div>
+
+    <div class="barras">
+      @for (d of semana; track d.dia) {
+        <div class="barra-col" [class.hoy]="d.hoy">
+          <span class="barra-valor">{{ d.valor }}%</span>
+          <div class="barra-pista">
+            <div class="barra-vertical" [style.height.%]="d.valor"></div>
+          </div>
+          <span class="barra-dia">{{ d.dia }}</span>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-cabecera">
+      <div>
+        <h2>Estado de habitaciones</h2>
+        <small>Distribución actual</small>
+      </div>
+    </div>
+
+    <div class="dona-contenedor">
+      <div class="dona">
+        <svg viewBox="0 0 180 180">
+          <circle cx="90" cy="90" [attr.r]="radio" fill="none" stroke="#edf1f7" stroke-width="20"/>
+          @for (s of segmentos; track s.nombre) {
+            <circle cx="90" cy="90" [attr.r]="radio" fill="none"
+                    [attr.stroke]="s.color"
+                    stroke-width="20"
+                    [attr.stroke-dasharray]="s.dasharray"
+                    [attr.stroke-dashoffset]="s.offset"
+                    transform="rotate(-90 90 90)"/>
+          }
+        </svg>
+        <div class="dona-centro">
+          <strong>{{ totalHabitaciones }}</strong>
+          <span>habitaciones</span>
+        </div>
+      </div>
+
+      <ul class="leyenda">
+        @for (s of segmentos; track s.nombre) {
+          <li>
+            <span class="punto" [style.background]="s.color"></span>
+            {{ s.nombre }}
+            <strong>{{ s.cantidad }}</strong>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+
 </div>
 
 <div class="panel">

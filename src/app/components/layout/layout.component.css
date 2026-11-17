@@ -89,8 +89,8 @@
 
 .menu-icon {
   width: 20px;
-  text-align: center;
-  font-size: 19px;
+  height: 20px;
+  flex-shrink: 0;
 }
 
 .sidebar-footer {

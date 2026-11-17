@@ -1,1 +1,133 @@
-/* Estilos compartidos en src/styles.css */
+.estadisticas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+/* Colores por tarjeta */
+.stat-card.azul    { --c: #2868b2; --c-bg: #e7f1ff; }
+.stat-card.verde   { --c: #1f8f65; --c-bg: #e3f6ee; }
+.stat-card.dorado  { --c: #b87612; --c-bg: #fff4e0; }
+.stat-card.morado  { --c: #6b4fbb; --c-bg: #efeaff; }
+
+.stat-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+  border: 1px solid #e7edf5;
+  border-radius: 14px;
+  background: white;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Línea de color arriba */
+.stat-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--c);
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(40, 104, 178, 0.1);
+}
+
+.stat-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.stat-icono {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--c-bg);
+  color: var(--c);
+}
+
+.stat-icono svg {
+  width: 22px;
+  height: 22px;
+}
+
+.tendencia {
+  padding: 4px 9px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.tendencia.sube { background: #e3f6ee; color: #1f8f65; }
+.tendencia.baja { background: #fdeaea; color: #c0392b; }
+
+.stat-titulo {
+  color: #77869a;
+  font-size: 13px;
+}
+
+.stat-card h2 {
+  margin: 8px 0 10px;
+  color: #25334a;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.stat-card small {
+  color: #9aa5b4;
+  font-size: 12px;
+}
+
+/* Barra de progreso */
+.barra {
+  height: 7px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background: #e9eff6;
+  overflow: hidden;
+}
+
+.barra-relleno {
+  height: 100%;
+  border-radius: 10px;
+  background: var(--c);
+  transition: width 0.6s ease;
+}
+
+/* Accesos rápidos */
+.accesos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.acceso {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px;
+  border-radius: 11px;
+  background: #f5f8fc;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.acceso:hover { background: #eaf3ff; }
+.acceso strong { color: #2868b2; font-size: 14px; }
+.acceso span { color: #77869a; font-size: 13px; }
+
+@media (max-width: 900px) {
+  .estadisticas { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 700px) {
+  .estadisticas, .accesos { grid-template-columns: 1fr; }
+}
