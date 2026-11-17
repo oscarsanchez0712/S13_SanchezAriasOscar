@@ -1,0 +1,74 @@
+<div class="actividad">
+
+  <div class="panel">
+    <div class="cab">
+      <h2>Check-in de hoy</h2>
+      <span class="cuenta verde">{{ checkIns.length }}</span>
+    </div>
+    @for (r of checkIns; track r.codigo) {
+      <div class="fila">
+        <div class="inicial">{{ r.huesped.charAt(0) }}</div>
+        <div class="info">
+          <strong>{{ r.huesped }}</strong>
+          <small>Hab. {{ r.habitacion }} · {{ r.noches }} noches</small>
+        </div>
+        <span [class]="'chip ' + r.estado.toLowerCase()">{{ r.estado }}</span>
+      </div>
+    } @empty {
+      <p class="vacio">No hay check-ins programados para hoy.</p>
+    }
+  </div>
+
+  <div class="panel">
+    <div class="cab">
+      <h2>Check-out de hoy</h2>
+      <span class="cuenta dorado">{{ checkOuts.length }}</span>
+    </div>
+    @for (r of checkOuts; track r.codigo) {
+      <div class="fila">
+        <div class="inicial">{{ r.huesped.charAt(0) }}</div>
+        <div class="info">
+          <strong>{{ r.huesped }}</strong>
+          <small>Hab. {{ r.habitacion }} · {{ r.noches }} noches</small>
+        </div>
+        <strong class="monto">S/ {{ r.total }}</strong>
+      </div>
+    } @empty {
+      <p class="vacio">No hay check-outs programados para hoy.</p>
+    }
+  </div>
+
+  <div class="panel ancho">
+    <div class="cab">
+      <h2>Reservas recientes</h2>
+      <a class="ver-todas" routerLink="/reservas">Ver todas</a>
+    </div>
+    <div class="scroll">
+      <table class="mini-tabla">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Huésped</th>
+            <th>Hab.</th>
+            <th>Entrada</th>
+            <th>Salida</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (r of recientes; track r.codigo) {
+            <tr>
+              <td>{{ r.codigo }}</td>
+              <td>{{ r.huesped }}</td>
+              <td>{{ r.habitacion }}</td>
+              <td>{{ r.entradaTxt }}</td>
+              <td>{{ r.salidaTxt }}</td>
+              <td><span [class]="'chip ' + r.estado.toLowerCase()">{{ r.estado }}</span></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
