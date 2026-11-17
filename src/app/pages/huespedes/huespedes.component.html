@@ -3,7 +3,18 @@
     <h1>Huéspedes</h1>
     <p>Consulta los huéspedes registrados en el hotel.</p>
   </div>
-  <span class="total">{{ huespedes.length }} registros</span>
+  <span class="total">{{ lista.length }} de {{ huespedes.length }} registros</span>
+</div>
+
+<div class="fx-barra">
+  <select class="fx-select" (change)="pais = $any($event.target).value">
+    @for (p of paises; track p) {
+      <option [value]="p">{{ p === 'Todos' ? 'Todos los países' : p }}</option>
+    }
+  </select>
+
+  <input class="fx-input" type="search" placeholder="Buscar nombre, documento o habitación..."
+         (input)="texto = $any($event.target).value" />
 </div>
 
 <div class="tabla-contenedor">
@@ -18,7 +29,7 @@
       </tr>
     </thead>
     <tbody>
-      @for (h of huespedes; track h.id) {
+      @for (h of lista; track h.id) {
         <tr>
           <td>{{ h.id }}</td>
           <td>{{ h.nombre }}</td>
@@ -29,4 +40,7 @@
       }
     </tbody>
   </table>
+  @if (lista.length === 0) {
+    <p class="fx-vacio">No hay huéspedes con esos filtros.</p>
+  }
 </div>

@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-huespedes',
   imports: [],
   templateUrl: './huespedes.component.html',
-  styleUrl: './huespedes.component.css'
+  styleUrls: ['./huespedes.component.css', '../../shared/filtros.css']
 })
 export class HuespedesComponent {
   huespedes = [
@@ -14,4 +14,16 @@ export class HuespedesComponent {
     { id: 4, nombre: 'Mateo Rossi', documento: 'IT-88213490', pais: 'Italia', habitacion: '301' },
     { id: 5, nombre: 'Lucía Ramírez', documento: '70981234', pais: 'Perú', habitacion: '—' }
   ];
+
+  paises = ['Todos', ...new Set(this.huespedes.map(h => h.pais))];
+  pais = 'Todos';
+  texto = '';
+
+  get lista() {
+    const q = this.texto.trim().toLowerCase();
+    return this.huespedes.filter(h =>
+      (this.pais === 'Todos' || h.pais === this.pais) &&
+      (!q || h.nombre.toLowerCase().includes(q) || h.documento.toLowerCase().includes(q) || h.habitacion.includes(q))
+    );
+  }
 }
