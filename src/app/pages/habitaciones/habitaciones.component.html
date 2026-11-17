@@ -1,42 +1,56 @@
 <div class="encabezado-pagina">
   <div>
     <h1>Habitaciones</h1>
-    <p>Tipos de habitación y estado actual de cada una.</p>
+    <p>Estado, tipos y tarifas por noche.</p>
   </div>
-  <span class="total">{{ habitaciones.length }} registros</span>
+  <span class="total">{{ lista.length }} de {{ todas.length }} habitaciones</span>
 </div>
 
-<div class="tipos">
-  @for (t of tipos; track t.nombre) {
-    <div class="tipo-card">
-      <h3>{{ t.nombre }}</h3>
-      <p>{{ t.detalle }}</p>
-      <small>Capacidad: {{ t.capacidad }} · S/ {{ t.precio }} por noche</small>
-    </div>
-  }
+<div class="fx-barra">
+  <div class="fx-chips">
+    @for (e of estados; track e) {
+      <button type="button" class="fx-chip" [class.activo]="estado === e" (click)="estado = e">
+        {{ e }} <b>{{ contar(e) }}</b>
+      </button>
+    }
+  </div>
+
+  <select class="fx-select" (change)="tipo = $any($event.target).value">
+    @for (t of tipos; track t) {
+      <option [value]="t">{{ t === 'Todos' ? 'Todos los tipos' : t }}</option>
+    }
+  </select>
+
+  <input class="fx-input" type="search" placeholder="Buscar por número..."
+         (input)="texto = $any($event.target).value" />
 </div>
 
 <div class="tabla-contenedor">
   <table>
     <thead>
       <tr>
-        <th>Número</th>
-        <th>Tipo</th>
+        <th>Habitación</th>
         <th>Piso</th>
-        <th>Precio por noche</th>
+        <th>Tipo</th>
+        <th>Tarifa por noche</th>
+        <th>Huéspedes</th>
         <th>Estado</th>
       </tr>
     </thead>
     <tbody>
-      @for (h of habitaciones; track h.numero) {
+      @for (h of lista; track h.numero) {
         <tr>
           <td>{{ h.numero }}</td>
-          <td>{{ h.tipo }}</td>
           <td>{{ h.piso }}</td>
-          <td>S/ {{ h.precio }}</td>
-          <td><span [class]="'badge ' + h.estado.toLowerCase()">{{ h.estado }}</span></td>
+          <td>{{ h.tipo }}</td>
+          <td>S/ {{ h.tarifa }}</td>
+          <td>{{ h.huespedes || '—' }}</td>
+          <td><span [class]="'fx-estado ' + h.estado.toLowerCase()">{{ h.estado }}</span></td>
         </tr>
       }
     </tbody>
   </table>
+  @if (lista.length === 0) {
+    <p class="fx-vacio">No hay habitaciones con esos filtros.</p>
+  }
 </div>
