@@ -1,0 +1,199 @@
+<div class="login-page">
+
+  <!-- ============ PANEL IZQUIERDO ============ -->
+  <section class="panel-marca">
+    <div class="luz l1"></div>
+    <div class="luz l2"></div>
+    <div class="rejilla"></div>
+
+    <header class="marca">
+      <div class="marca-icon">HV</div>
+      <div>
+        <h2>Hotel Valle Real</h2>
+        <span>Sistema hotelero</span>
+      </div>
+      <span class="estado"><i></i> Sistema en línea</span>
+    </header>
+
+    <div class="centro">
+      <h1>Todo tu hotel, <em>en un solo lugar</em></h1>
+      <p>Controla habitaciones, huéspedes y reservas con un panel claro, rápido y seguro.</p>
+
+      <!-- Estadísticas -->
+      <div class="stats">
+        <div><strong>120+</strong><span>Habitaciones</span></div>
+        <div><strong>98%</strong><span>Satisfacción</span></div>
+        <div><strong>24/7</strong><span>Recepción</span></div>
+      </div>
+
+      <!-- Vista previa del dashboard -->
+      <div class="preview">
+        <div class="tarjeta t-ocupacion">
+          <small>Ocupación hoy</small>
+          <strong>87%</strong>
+          <div class="barra"><span style="width: 87%"></span></div>
+        </div>
+
+        <div class="tarjeta t-reservas">
+          <small>Reservas de la semana</small>
+          <div class="grafico">
+            <span style="height: 40%"></span><span style="height: 62%"></span>
+            <span style="height: 48%"></span><span style="height: 80%"></span>
+            <span style="height: 66%"></span><span style="height: 92%"></span>
+            <span style="height: 74%"></span>
+          </div>
+        </div>
+
+        <div class="tarjeta t-checkin">
+          <div class="ok">✓</div>
+          <div>
+            <b>Check-in confirmado</b>
+            <small>Habitación 204 · hace 2 min</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Características -->
+      <ul class="features">
+        <li><span class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20v-9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9"/><path d="M3 16h18"/></svg>
+        </span>Control de habitaciones</li>
+        <li><span class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/></svg>
+        </span>Registro de huéspedes</li>
+        <li><span class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>
+        </span>Gestión de reservas</li>
+        <li><span class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>
+        </span>Acceso seguro por usuario</li>
+      </ul>
+
+      <!-- Testimonio -->
+      <blockquote class="testimonio">
+        “Desde que usamos el panel, las reservas se registran en segundos y ya no hay cruces de habitaciones.”
+        <footer>
+          <span class="avatar">MR</span>
+          <div><b>María Rojas</b><small>Administradora de recepción</small></div>
+        </footer>
+      </blockquote>
+    </div>
+
+    <footer class="pie">© Hotel Valle Real · Versión demostrativa</footer>
+  </section>
+
+  <!-- ============ PANEL DERECHO ============ -->
+  <section class="panel-form">
+    <div class="login-card">
+
+      <div class="candado">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+      </div>
+
+      <div class="tabs">
+        <button type="button" [class.activo]="modo === 'login'" (click)="cambiarModo('login')">Iniciar sesión</button>
+        <button type="button" [class.activo]="modo === 'registro'" (click)="cambiarModo('registro')">Crear cuenta</button>
+      </div>
+
+      @if (exito) {
+        <div class="alerta ok-msg">{{ exito }}</div>
+      }
+
+      <!-- ---------- LOGIN ---------- -->
+      @if (modo === 'login') {
+        <h2>Bienvenido de nuevo</h2>
+        <p class="sub">Ingresa tus credenciales para acceder al panel.</p>
+
+        <form [formGroup]="form" (ngSubmit)="ingresar()" novalidate>
+          <label for="correo">Correo electrónico</label>
+          <div class="campo" [class.invalido]="form.controls.correo.touched && form.controls.correo.invalid">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            <input id="correo" type="email" formControlName="correo" placeholder="usuario&#64;ejemplo.com" autocomplete="username" />
+          </div>
+          @if (form.controls.correo.touched && form.controls.correo.invalid) {
+            <small class="campo-error">Ingresa un correo válido.</small>
+          }
+
+          <label for="password">Contraseña</label>
+          <div class="campo" [class.invalido]="form.controls.password.touched && form.controls.password.invalid">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+            <input id="password" [type]="verPassword ? 'text' : 'password'" formControlName="password" placeholder="••••••••" autocomplete="current-password" />
+            <button type="button" class="ojo" (click)="verPassword = !verPassword" [attr.aria-label]="verPassword ? 'Ocultar contraseña' : 'Ver contraseña'">
+              {{ verPassword ? 'Ocultar' : 'Ver' }}
+            </button>
+          </div>
+          @if (form.controls.password.touched && form.controls.password.invalid) {
+            <small class="campo-error">La contraseña es obligatoria.</small>
+          }
+
+          @if (error) {
+            <div class="alerta">{{ error }}</div>
+          }
+
+          <button type="submit" class="principal" [disabled]="cargando">
+            @if (cargando) { <span class="spinner"></span> Verificando... } @else { Ingresar }
+          </button>
+        </form>
+
+        <p class="cambio">¿No tienes cuenta? <a (click)="cambiarModo('registro')">Regístrate aquí</a></p>
+      }
+
+      <!-- ---------- REGISTRO ---------- -->
+      @if (modo === 'registro') {
+        <h2>Crea tu cuenta</h2>
+        <p class="sub">Regístrate para acceder al sistema del hotel.</p>
+
+        <form [formGroup]="formRegistro" (ngSubmit)="registrar()" novalidate>
+          <label for="r-nombre">Nombre completo</label>
+          <div class="campo" [class.invalido]="formRegistro.controls.nombre.touched && formRegistro.controls.nombre.invalid">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg>
+            <input id="r-nombre" type="text" formControlName="nombre" placeholder="Tu nombre" autocomplete="name" />
+          </div>
+          @if (formRegistro.controls.nombre.touched && formRegistro.controls.nombre.invalid) {
+            <small class="campo-error">Ingresa tu nombre (mínimo 3 caracteres).</small>
+          }
+
+          <label for="r-correo">Correo electrónico</label>
+          <div class="campo" [class.invalido]="formRegistro.controls.correo.touched && formRegistro.controls.correo.invalid">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            <input id="r-correo" type="email" formControlName="correo" placeholder="usuario&#64;ejemplo.com" autocomplete="email" />
+          </div>
+          @if (formRegistro.controls.correo.touched && formRegistro.controls.correo.invalid) {
+            <small class="campo-error">Ingresa un correo válido.</small>
+          }
+
+          <label for="r-password">Contraseña</label>
+          <div class="campo" [class.invalido]="formRegistro.controls.password.touched && formRegistro.controls.password.invalid">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+            <input id="r-password" [type]="verPassword ? 'text' : 'password'" formControlName="password" placeholder="Mínimo 6 caracteres" autocomplete="new-password" />
+            <button type="button" class="ojo" (click)="verPassword = !verPassword">{{ verPassword ? 'Ocultar' : 'Ver' }}</button>
+          </div>
+          @if (formRegistro.controls.password.touched && formRegistro.controls.password.invalid) {
+            <small class="campo-error">La contraseña debe tener al menos 6 caracteres.</small>
+          }
+
+          <label for="r-confirmar">Confirmar contraseña</label>
+          <div class="campo" [class.invalido]="formRegistro.controls.confirmar.touched && (formRegistro.controls.confirmar.invalid || formRegistro.errors?.['noCoincide'])">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>
+            <input id="r-confirmar" [type]="verPassword ? 'text' : 'password'" formControlName="confirmar" placeholder="Repite la contraseña" autocomplete="new-password" />
+          </div>
+          @if (formRegistro.controls.confirmar.touched && formRegistro.errors?.['noCoincide']) {
+            <small class="campo-error">Las contraseñas no coinciden.</small>
+          }
+
+          @if (error) {
+            <div class="alerta">{{ error }}</div>
+          }
+
+          <button type="submit" class="principal" [disabled]="cargando">
+            @if (cargando) { <span class="spinner"></span> Creando cuenta... } @else { Crear cuenta }
+          </button>
+        </form>
+
+        <p class="cambio">¿Ya tienes cuenta? <a (click)="cambiarModo('login')">Inicia sesión</a></p>
+      }
+
+    </div>
+  </section>
+
+</div>
