@@ -59,6 +59,10 @@
 
     </nav>
 
+    <button class="btn-logout" type="button" (click)="cerrarSesion()">
+      Cerrar sesión
+    </button>
+
     <div class="sidebar-footer">
       <span class="estado"></span>
       Sistema de Hotel
@@ -78,8 +82,8 @@
       <div class="usuario">
         <div class="avatar">AD</div>
         <div>
-          <strong>Administrador</strong>
-          <small>Usuario del sistema</small>
+          <strong>{{ usuario?.nombre }}</strong>
+          <small>{{ usuario?.correo }}</small>
         </div>
       </div>
     </header>
