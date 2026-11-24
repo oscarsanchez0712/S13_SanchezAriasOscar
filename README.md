@@ -124,3 +124,9 @@ Repositorio: [S13_SanchezAriasOscar](https://github.com/oscarsanchez0712/S13_San
 **Desarrollado con ❤️ utilizando Angular 19**
 
 </div>
+
+## Despliegue
+
+- Plataforma: Render (Static Site)
+- Build Command: npm install && npm run build
+- Publish Directory: dist/dashboard-hotel/browser
